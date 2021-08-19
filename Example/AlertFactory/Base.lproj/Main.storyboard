@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,11 +18,43 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsL-18-JXZ">
+                                <rect key="frame" x="171" y="8" width="33" height="30"/>
+                                <state key="normal" title="Alert"/>
+                                <connections>
+                                    <action selector="alertButtonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ub2-w8-Mwd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkB-w7-MzE">
+                                <rect key="frame" x="160" y="46" width="55" height="30"/>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="confirmButtonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PYQ-qV-gaL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rON-ek-t2n">
+                                <rect key="frame" x="162" y="84" width="51" height="30"/>
+                                <state key="normal" title="Prompt"/>
+                                <connections>
+                                    <action selector="promptButtonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rRr-7n-CRT"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gsL-18-JXZ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3NI-LZ-lis"/>
+                            <constraint firstItem="rON-ek-t2n" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="JWb-4Y-dqY"/>
+                            <constraint firstItem="TkB-w7-MzE" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XbU-Ld-NjS"/>
+                            <constraint firstItem="gsL-18-JXZ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="d33-wg-fOH"/>
+                            <constraint firstItem="rON-ek-t2n" firstAttribute="top" secondItem="TkB-w7-MzE" secondAttribute="bottom" constant="8" symbolic="YES" id="jjk-py-wit"/>
+                            <constraint firstItem="TkB-w7-MzE" firstAttribute="top" secondItem="gsL-18-JXZ" secondAttribute="bottom" constant="8" symbolic="YES" id="oBe-Q5-5Ch"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="22" y="125"/>
         </scene>
     </scenes>
 </document>
