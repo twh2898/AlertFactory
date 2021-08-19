@@ -34,6 +34,9 @@ public struct AlertFactory {
     /// Placeholder text for the text field in `prompt(confirmAction:cancelAction:)`.
     public var placeholder: String
 
+    /// Default value for the text field in `prompt(confirmAction:cancelAction:)`.
+    public var defaultValue: String?
+
     /// UITextContainerType for the text field in `prompt(confirmAction:cancelAction:)`.
     public var textContentType: UITextContentType
 
@@ -52,7 +55,8 @@ public struct AlertFactory {
     /// Member-wise initializer with defaults.
     public init(
         title: String? = nil, message: String? = nil, confirmLabel: String = "Ok", confirmStyle: UIAlertAction.Style = UIAlertAction.Style.default, cancelLabel: String = "Cancel",
-        cancelStyle: UIAlertAction.Style = UIAlertAction.Style.cancel, preferredStyle: UIAlertController.Style = UIAlertController.Style.alert, placeholder: String = "Name", textContentType: UITextContentType = UITextContentType.name,
+        cancelStyle: UIAlertAction.Style = UIAlertAction.Style.cancel, preferredStyle: UIAlertController.Style = UIAlertController.Style.alert, placeholder: String = "Name", defaultValue: String? = nil,
+        textContentType: UITextContentType = UITextContentType.name,
         autocapitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.words, autocorrectionType: UITextAutocorrectionType = UITextAutocorrectionType.yes,
         spellCheckingType: UITextSpellCheckingType = UITextSpellCheckingType.yes, keyboardType: UIKeyboardType = UIKeyboardType.default
     ) {
@@ -64,6 +68,7 @@ public struct AlertFactory {
         self.cancelStyle = cancelStyle
         self.preferredStyle = preferredStyle
         self.placeholder = placeholder
+        self.defaultValue = defaultValue
         self.textContentType = textContentType
         self.autocapitalizationType = autocapitalizationType
         self.autocorrectionType = autocorrectionType
@@ -130,6 +135,7 @@ public struct AlertFactory {
         let cancelAction = UIAlertAction(title: cancelLabel, style: cancelStyle) { _ in cancelAction() }
 
         alert.addTextField { textField in
+            textField.text = self.defaultValue
             textField.placeholder = self.placeholder
             textField.textContentType = self.textContentType
             textField.autocapitalizationType = self.autocapitalizationType
@@ -153,11 +159,12 @@ extension UIViewController {
         - title: the prompt alert title
         - message: optional message
         - placeholder: placeholder text for the text field
+        - defaultValue: optional default text
         - confirmAction: callback for the confirm button press
         - cancelAction: optional callback for the cancel button press
      */
-    public func prompt(title: String?, message: String?, placeholder: String, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
-        let alertFactory = AlertFactory(title: title, message: message, placeholder: placeholder)
+    public func prompt(title: String?, message: String?, placeholder: String, defaultValue: String? = nil, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
+        let alertFactory = AlertFactory(title: title, message: message, placeholder: placeholder, defaultValue: defaultValue)
         let alert = alertFactory.prompt(confirmAction: confirmAction, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
     }

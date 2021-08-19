@@ -40,13 +40,22 @@
                                     <action selector="promptButtonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rRr-7n-CRT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0m-zH-NGp">
+                                <rect key="frame" x="119" y="122" width="137" height="30"/>
+                                <state key="normal" title="Prompt with Default"/>
+                                <connections>
+                                    <action selector="promptWithDefaultButtonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vBq-o1-Frj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="gsL-18-JXZ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3NI-LZ-lis"/>
                             <constraint firstItem="rON-ek-t2n" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="JWb-4Y-dqY"/>
                             <constraint firstItem="TkB-w7-MzE" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XbU-Ld-NjS"/>
+                            <constraint firstItem="C0m-zH-NGp" firstAttribute="top" secondItem="rON-ek-t2n" secondAttribute="bottom" constant="8" symbolic="YES" id="axN-48-TmS"/>
                             <constraint firstItem="gsL-18-JXZ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="d33-wg-fOH"/>
+                            <constraint firstItem="C0m-zH-NGp" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="fK4-K9-izc"/>
                             <constraint firstItem="rON-ek-t2n" firstAttribute="top" secondItem="TkB-w7-MzE" secondAttribute="bottom" constant="8" symbolic="YES" id="jjk-py-wit"/>
                             <constraint firstItem="TkB-w7-MzE" firstAttribute="top" secondItem="gsL-18-JXZ" secondAttribute="bottom" constant="8" symbolic="YES" id="oBe-Q5-5Ch"/>
                         </constraints>

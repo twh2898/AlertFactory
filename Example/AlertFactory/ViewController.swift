@@ -88,4 +88,29 @@ class ViewController: UIViewController {
             present(alert, animated: true)
         }
     }
+
+    @IBAction func promptWithDefaultButtonAction(_ sender: Any) {
+        if useShorthand {
+            self.prompt(
+                title: "Prompt", message: "This is a prompt", placeholder: "Placeholder", defaultValue: "Default Text",
+                confirmAction: { text in
+                    if let text = text {
+                        print("Prompt was confirmed with text", text)
+                    }
+                },
+                cancelAction: {
+                    print("Prompt was canceled")
+                })
+        } else {
+            let factory = AlertFactory(title: "Prompt", message: "This is a prompt", defaultValue: "Default Text")
+            let alert = factory.prompt(
+                confirmAction: { text in
+                    print("Prompt was confirmed with", text!)
+                },
+                cancelAction: {
+                    print("Prompt was canceled")
+                })
+            present(alert, animated: true)
+        }
+    }
 }
