@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'AlertFactory_Example' do
+  pod 'AlertFactory', :path => '../'
+
+  target 'AlertFactory_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
