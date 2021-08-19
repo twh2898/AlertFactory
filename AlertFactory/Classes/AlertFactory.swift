@@ -11,7 +11,7 @@ import os
 /// Create and show alerts to the user.
 public struct AlertFactory {
     /// Title for the alert.
-    public var title: String
+    public var title: String?
 
     /// Optional message for the alert. Set to `nil` to disable the message.
     public var message: String?
@@ -51,7 +51,7 @@ public struct AlertFactory {
 
     /// Member-wise initializer with defaults.
     public init(
-        title: String = "Alert", message: String? = nil, confirmLabel: String = "Ok", confirmStyle: UIAlertAction.Style = UIAlertAction.Style.default, cancelLabel: String = "Cancel",
+        title: String? = nil, message: String? = nil, confirmLabel: String = "Ok", confirmStyle: UIAlertAction.Style = UIAlertAction.Style.default, cancelLabel: String = "Cancel",
         cancelStyle: UIAlertAction.Style = UIAlertAction.Style.cancel, preferredStyle: UIAlertController.Style = UIAlertController.Style.alert, placeholder: String = "Name", textContentType: UITextContentType = UITextContentType.name,
         autocapitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.words, autocorrectionType: UITextAutocorrectionType = UITextAutocorrectionType.yes,
         spellCheckingType: UITextSpellCheckingType = UITextSpellCheckingType.yes, keyboardType: UIKeyboardType = UIKeyboardType.default
@@ -77,8 +77,8 @@ public struct AlertFactory {
      The confirm button will be `UIAlertAction.Style.default` and the cancel button will be `UIAlertAction.Style.cancel`.
 
      - Parameters:
-     - confirmAction: callback for the confirm button action
-     - cancelAction: optional callback for the cancel button action
+        - confirmAction: callback for the confirm button action
+        - cancelAction: optional callback for the cancel button action
      */
     public func confirm(confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void = {}) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
@@ -97,8 +97,7 @@ public struct AlertFactory {
 
      The button will be `cancelStyle`.
 
-     - Parameters:
-     - confirmAction: optional callback for the confirm button action
+     - Parameter confirmAction: optional callback for the confirm button action
      */
     public func alert(confirmAction: @escaping () -> Void = {}) -> UIAlertController {
         let alert = UIAlertController(
@@ -118,8 +117,8 @@ public struct AlertFactory {
      The confirm button will be `UIAlertAction.Style.default` and the cancel button will be `UIAlertAction.Style.cancel`.
 
      - Parameters:
-     - confirmAction: callback for the confirm button action
-     - cancelAction: optional callback for the cancel button action
+        - confirmAction: callback for the confirm button action
+        - cancelAction: optional callback for the cancel button action
      */
     public func prompt(confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) -> UIAlertController {
         let alert = UIAlertController(title: "Enter a name", message: "Please enter a name", preferredStyle: preferredStyle)
@@ -151,13 +150,13 @@ extension UIViewController {
      Construct and show a prompt using `AlertFactory`.
 
      - Parameters:
-     - title: the prompt alert title
-     - message: optional message
-     - placeholder: placeholder text for the text field
-     - confirmAction: callback for the confirm button press
-     - cancelAction: optional callback for the cancel button press
+        - title: the prompt alert title
+        - message: optional message
+        - placeholder: placeholder text for the text field
+        - confirmAction: callback for the confirm button press
+        - cancelAction: optional callback for the cancel button press
      */
-    public func prompt(title: String, message: String?, placeholder: String, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
+    public func prompt(title: String?, message: String?, placeholder: String, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message, placeholder: placeholder)
         let alert = alertFactory.prompt(confirmAction: confirmAction, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
@@ -167,12 +166,12 @@ extension UIViewController {
      Construct and show a confirmation using `AlertFactory`.
 
      - Parameters:
-     - title: the confirm alert title
-     - message: optional message
-     - confirmAction: callback for the confirm button press
-     - cancelAction: optional callback for the cancel button press
+        - title: the confirm alert title
+        - message: optional message
+        - confirmAction: callback for the confirm button press
+        - cancelAction: optional callback for the cancel button press
      */
-    public func confirm(title: String, message: String?, confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void = {}) {
+    public func confirm(title: String?, message: String?, confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.confirm(confirmAction: confirmAction, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
@@ -182,11 +181,11 @@ extension UIViewController {
      Construct and show an alert using `AlertFactory`.
 
      - Parameters:
-     - title: the alert title
-     - message: optional message
-     - confirmAction: callback for the confirm button press
+        - title: the alert title
+        - message: optional message
+        - confirmAction: callback for the confirm button press
      */
-    public func alert(title: String, message: String?, confirmAction: @escaping () -> Void = {}) {
+    public func alert(title: String?, message: String?, confirmAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.alert(confirmAction: confirmAction)
         present(alert, animated: true, completion: nil)
