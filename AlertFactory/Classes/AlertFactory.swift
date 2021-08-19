@@ -11,43 +11,65 @@ import os
 /// Create and show alerts to the user.
 public struct AlertFactory {
     /// Title for the alert.
-    public var title = "Alert"
+    public var title: String
 
     /// Optional message for the alert. Set to `nil` to disable the message.
-    public var message: String? = nil
+    public var message: String?
 
     /// The label for the confirmation button.
-    public var confirmLabel = "Ok"
+    public var confirmLabel: String
 
     /// The style for the confirmation button.
-    public var confirmStyle = UIAlertAction.Style.default
+    public var confirmStyle: UIAlertAction.Style
 
     /// The label for the cancel button.
-    public var cancelLabel = "Cancel"
+    public var cancelLabel: String
 
     /// The style for the cancel button.
-    public var cancelStyle = UIAlertAction.Style.cancel
+    public var cancelStyle: UIAlertAction.Style
 
     /// The preferred UIAlertController style.
-    public var preferredStyle = UIAlertController.Style.alert
+    public var preferredStyle: UIAlertController.Style
 
     /// Placeholder text for the text field in `prompt(confirmAction:cancelAction:)`.
-    public var placeholder = "Name"
+    public var placeholder: String
 
     /// UITextContainerType for the text field in `prompt(confirmAction:cancelAction:)`.
-    public var textContentType = UITextContentType.name
+    public var textContentType: UITextContentType
 
     /// UITextAutocapitalizationType for the text field in `prompt(confirmAction:cancelAction:)`.
-    public var autocapitalizationType = UITextAutocapitalizationType.words
+    public var autocapitalizationType: UITextAutocapitalizationType
 
     /// UITextAutocorrectionType for the text field in `prompt(confirmAction:cancelAction:)`.
-    public var autocorrectionType = UITextAutocorrectionType.yes
+    public var autocorrectionType: UITextAutocorrectionType
 
     /// UITextSpellCheckingType for the text field in `prompt(confirmAction:cancelAction:)`.
-    public var spellCheckingType = UITextSpellCheckingType.yes
+    public var spellCheckingType: UITextSpellCheckingType
 
     /// UIKeyboardType for the text field in `prompt(confirmAction:cancelAction:)`.
-    public var keyboardType = UIKeyboardType.default
+    public var keyboardType: UIKeyboardType
+
+    /// Member-wise initializer with defaults.
+    public init(
+        title: String = "Alert", message: String? = nil, confirmLabel: String = "Ok", confirmStyle: UIAlertAction.Style = UIAlertAction.Style.default, cancelLabel: String = "Cancel",
+        cancelStyle: UIAlertAction.Style = UIAlertAction.Style.cancel, preferredStyle: UIAlertController.Style = UIAlertController.Style.alert, placeholder: String = "Name", textContentType: UITextContentType = UITextContentType.name,
+        autocapitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.words, autocorrectionType: UITextAutocorrectionType = UITextAutocorrectionType.yes,
+        spellCheckingType: UITextSpellCheckingType = UITextSpellCheckingType.yes, keyboardType: UIKeyboardType = UIKeyboardType.default
+    ) {
+        self.title = title
+        self.message = message
+        self.confirmLabel = confirmLabel
+        self.confirmStyle = confirmStyle
+        self.cancelLabel = cancelLabel
+        self.cancelStyle = cancelStyle
+        self.preferredStyle = preferredStyle
+        self.placeholder = placeholder
+        self.textContentType = textContentType
+        self.autocapitalizationType = autocapitalizationType
+        self.autocorrectionType = autocorrectionType
+        self.spellCheckingType = spellCheckingType
+        self.keyboardType = keyboardType
+    }
 
     /**
      Show an alert that has `title`, `message` and two buttons for `confirmLabel` and `cancelLabel`.
