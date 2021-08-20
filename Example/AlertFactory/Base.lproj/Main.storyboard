@@ -54,19 +54,35 @@
                                     <action selector="selectAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="M0z-LU-reu"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4Fc-5U-Fw0">
+                                <rect key="frame" x="253" y="193" width="51" height="31"/>
+                                <connections>
+                                    <action selector="useShorthandAction:" destination="vXZ-lx-hvc" eventType="valueChanged" id="0H0-Dj-gJk"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Shorthand" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hk2-jG-X9g">
+                                <rect key="frame" x="130" y="198" width="115" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="gsL-18-JXZ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3NI-LZ-lis"/>
                             <constraint firstItem="XtF-0s-ITy" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="6zh-7P-hJg"/>
+                            <constraint firstItem="4Fc-5U-Fw0" firstAttribute="leading" secondItem="hk2-jG-X9g" secondAttribute="trailing" constant="8" symbolic="YES" id="BgB-CW-WDP"/>
                             <constraint firstItem="rON-ek-t2n" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="JWb-4Y-dqY"/>
                             <constraint firstItem="TkB-w7-MzE" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XbU-Ld-NjS"/>
                             <constraint firstItem="C0m-zH-NGp" firstAttribute="top" secondItem="rON-ek-t2n" secondAttribute="bottom" constant="8" symbolic="YES" id="axN-48-TmS"/>
                             <constraint firstItem="gsL-18-JXZ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="d33-wg-fOH"/>
                             <constraint firstItem="C0m-zH-NGp" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="fK4-K9-izc"/>
                             <constraint firstItem="rON-ek-t2n" firstAttribute="top" secondItem="TkB-w7-MzE" secondAttribute="bottom" constant="8" symbolic="YES" id="jjk-py-wit"/>
+                            <constraint firstItem="hk2-jG-X9g" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="mgH-Vg-hpM"/>
                             <constraint firstItem="TkB-w7-MzE" firstAttribute="top" secondItem="gsL-18-JXZ" secondAttribute="bottom" constant="8" symbolic="YES" id="oBe-Q5-5Ch"/>
                             <constraint firstItem="XtF-0s-ITy" firstAttribute="top" secondItem="C0m-zH-NGp" secondAttribute="bottom" constant="8" symbolic="YES" id="puo-G3-u1I"/>
+                            <constraint firstItem="hk2-jG-X9g" firstAttribute="top" secondItem="XtF-0s-ITy" secondAttribute="bottom" constant="8" symbolic="YES" id="vOn-TH-KHg"/>
+                            <constraint firstItem="4Fc-5U-Fw0" firstAttribute="centerY" secondItem="hk2-jG-X9g" secondAttribute="centerY" id="wff-CZ-D93"/>
                         </constraints>
                     </view>
                 </viewController>

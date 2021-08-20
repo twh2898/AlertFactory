@@ -11,7 +11,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let useShorthand = false
+    var useShorthand = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +133,7 @@ class ViewController: UIViewController {
                     print("Confirm was canceled")
                 })
         } else {
-            let factory = AlertFactory(title: "Select a Fruit", message: "What is your favorite fruit?")
+            let factory = AlertFactory(title: "Select a Fruit", message: "What is your favorite fruit?", cancelLabel: "Other")
             let alert = factory.select(
                 actions: actions,
                 cancelAction: {
@@ -141,5 +141,10 @@ class ViewController: UIViewController {
                 })
             present(alert, animated: true)
         }
+    }
+
+    @IBAction func useShorthandAction(_ sender: Any) {
+        let sender = sender as! UISwitch
+        useShorthand = sender.isOn
     }
 }
