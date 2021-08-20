@@ -155,8 +155,8 @@ public struct AlertFactory {
      This is typically used with `preferredStyle = .actionSheet`
 
      - Parameters:
-     - confirmAction: callback for the confirm button action
-     - cancelAction: optional callback for the cancel button action
+        - actions: the action buttons to select from
+        - cancelAction: optional callback for the cancel button action
      */
     public func select(_ actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
@@ -220,6 +220,15 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
+    /**
+     Construct and show a select using `AlertFactory`.
+
+     - Parameters:
+        - title: the alert title
+        - message: optional message
+        - actions: the action buttons to select from
+        - cancelAction: callback for the cancel button press
+     */
     public func select(title: String?, message: String?, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.select(actions, cancelAction: cancelAction)
