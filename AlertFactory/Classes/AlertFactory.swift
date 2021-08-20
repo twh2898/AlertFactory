@@ -28,9 +28,6 @@ public struct AlertFactory {
     /// The style for the cancel button.
     public var cancelStyle: UIAlertAction.Style
 
-    /// The preferred UIAlertController style.
-    public var preferredStyle: UIAlertController.Style
-
     /// Placeholder text for the text field in `prompt(confirmAction:cancelAction:)`.
     public var placeholder: String
 
@@ -55,7 +52,7 @@ public struct AlertFactory {
     /// Member-wise initializer with defaults.
     public init(
         title: String? = nil, message: String? = nil, confirmLabel: String = "Ok", confirmStyle: UIAlertAction.Style = UIAlertAction.Style.default, cancelLabel: String = "Cancel",
-        cancelStyle: UIAlertAction.Style = UIAlertAction.Style.cancel, preferredStyle: UIAlertController.Style = UIAlertController.Style.alert, placeholder: String = "Name", defaultValue: String? = nil,
+        cancelStyle: UIAlertAction.Style = UIAlertAction.Style.cancel, placeholder: String = "Name", defaultValue: String? = nil,
         textContentType: UITextContentType = UITextContentType.name,
         autocapitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.words, autocorrectionType: UITextAutocorrectionType = UITextAutocorrectionType.yes,
         spellCheckingType: UITextSpellCheckingType = UITextSpellCheckingType.yes, keyboardType: UIKeyboardType = UIKeyboardType.default
@@ -66,7 +63,6 @@ public struct AlertFactory {
         self.confirmStyle = confirmStyle
         self.cancelLabel = cancelLabel
         self.cancelStyle = cancelStyle
-        self.preferredStyle = preferredStyle
         self.placeholder = placeholder
         self.defaultValue = defaultValue
         self.textContentType = textContentType
@@ -87,7 +83,7 @@ public struct AlertFactory {
         let alert = UIAlertController(
             title: title,
             message: message,
-            preferredStyle: preferredStyle)
+            preferredStyle: .alert)
 
         let confirmAction = UIAlertAction(title: confirmLabel, style: cancelStyle) { _ in confirmAction() }
         alert.addAction(confirmAction)
@@ -105,7 +101,7 @@ public struct AlertFactory {
         - cancelAction: optional callback for the cancel button action
      */
     public func confirm(confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void = {}) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let confirmAction = UIAlertAction(title: confirmLabel, style: confirmStyle) { _ in confirmAction() }
         let cancelAction = UIAlertAction(title: cancelLabel, style: cancelStyle) { _ in cancelAction() }
@@ -119,14 +115,16 @@ public struct AlertFactory {
     /**
      Shows an alert with multiple actions and a cancel action.
 
-     This is typically used with `preferredStyle = .actionSheet`
+     If `sender` is not `nil`, the preferredStyle will be `UIAlertController.Style.actionSheet`, otherwise it will be `UIAlertController.Style.alert`.
 
      - Parameters:
         - actions: the action buttons to select from
         - cancelAction: optional callback for the cancel button action
+        - sender: optional UIBarButtonItem if the alert style should be an Action Sheet
      */
-    public func select(actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+    public func select(actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}, sender: UIBarButtonItem? = nil) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: (sender == nil ? .alert : .actionSheet))
+        alert.popoverPresentationController?.barButtonItem = sender
 
         for action in actions {
             alert.addAction(action)
@@ -148,7 +146,7 @@ public struct AlertFactory {
         - cancelAction: optional callback for the cancel button action
      */
     public func prompt(confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let confirmAction = UIAlertAction(title: confirmLabel, style: confirmStyle) { [weak alert] _ in
             let value = alert?.textFields?[0].text
@@ -211,10 +209,11 @@ extension UIViewController {
         - message: optional message
         - actions: the action buttons to select from
         - cancelAction: callback for the cancel button press
+        - sender: optional UIBarButtonItem if the alert style should be an Action Sheet
      */
-    public func select(title: String?, message: String?, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) {
+    public func select(title: String?, message: String?, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}, sender: UIBarButtonItem? = nil) {
         let alertFactory = AlertFactory(title: title, message: message)
-        let alert = alertFactory.select(actions: actions, cancelAction: cancelAction)
+        let alert = alertFactory.select(actions: actions, cancelAction: cancelAction, sender: sender)
         present(alert, animated: true, completion: nil)
     }
 
