@@ -148,6 +148,28 @@ public struct AlertFactory {
 
         return alert
     }
+
+    /**
+     Shows an alert with multiple actions and a cancel action.
+
+     This is typically used with `preferredStyle = .actionSheet`
+
+     - Parameters:
+     - confirmAction: callback for the confirm button action
+     - cancelAction: optional callback for the cancel button action
+     */
+    public func select(_ actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+
+        for action in actions {
+            alert.addAction(action)
+        }
+
+        let cancelAction = UIAlertAction(title: cancelLabel, style: cancelStyle) { _ in cancelAction() }
+        alert.addAction(cancelAction)
+
+        return alert
+    }
 }
 
 extension UIViewController {
@@ -195,6 +217,12 @@ extension UIViewController {
     public func alert(title: String?, message: String?, confirmAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.alert(confirmAction: confirmAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+    public func select(title: String?, message: String?, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) {
+        let alertFactory = AlertFactory(title: title, message: message)
+        let alert = alertFactory.select(actions, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
     }
 }
