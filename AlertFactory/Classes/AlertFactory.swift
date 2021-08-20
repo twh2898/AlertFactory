@@ -79,7 +79,7 @@ public struct AlertFactory {
     /**
      Show an alert that has `title`, `message` and two buttons for `confirmLabel` and `cancelLabel`.
 
-     The confirm button will be `UIAlertAction.Style.default` and the cancel button will be `UIAlertAction.Style.cancel`.
+     The confirm button will be `confirmStyle` and the cancel button will be `cancelStyle`.
 
      - Parameters:
         - confirmAction: callback for the confirm button action
@@ -119,14 +119,14 @@ public struct AlertFactory {
     /**
      Show an alert that has `title`, `message` and two buttons for `confirmLabel` and `cancelLabel`, and a text field.
 
-     The confirm button will be `UIAlertAction.Style.default` and the cancel button will be `UIAlertAction.Style.cancel`.
+     The confirm button will be `confirmStyle` and the cancel button will be `cancelStyle`.
 
      - Parameters:
         - confirmAction: callback for the confirm button action
         - cancelAction: optional callback for the cancel button action
      */
     public func prompt(confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) -> UIAlertController {
-        let alert = UIAlertController(title: "Enter a name", message: "Please enter a name", preferredStyle: preferredStyle)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
 
         let confirmAction = UIAlertAction(title: confirmLabel, style: confirmStyle) { [weak alert] _ in
             let value = alert?.textFields?[0].text
