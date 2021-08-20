@@ -77,6 +77,25 @@ public struct AlertFactory {
     }
 
     /**
+     Show an alert that has `title`, `message` and one button for `confirmLabel`.
+
+     The button will be `cancelStyle`.
+
+     - Parameter confirmAction: optional callback for the confirm button action
+     */
+    public func alert(confirmAction: @escaping () -> Void = {}) -> UIAlertController {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: preferredStyle)
+
+        let confirmAction = UIAlertAction(title: confirmLabel, style: cancelStyle) { _ in confirmAction() }
+        alert.addAction(confirmAction)
+
+        return alert
+    }
+
+    /**
      Show an alert that has `title`, `message` and two buttons for `confirmLabel` and `cancelLabel`.
 
      The confirm button will be `confirmStyle` and the cancel button will be `cancelStyle`.
@@ -98,20 +117,23 @@ public struct AlertFactory {
     }
 
     /**
-     Show an alert that has `title`, `message` and one button for `confirmLabel`.
+     Shows an alert with multiple actions and a cancel action.
 
-     The button will be `cancelStyle`.
+     This is typically used with `preferredStyle = .actionSheet`
 
-     - Parameter confirmAction: optional callback for the confirm button action
+     - Parameters:
+        - actions: the action buttons to select from
+        - cancelAction: optional callback for the cancel button action
      */
-    public func alert(confirmAction: @escaping () -> Void = {}) -> UIAlertController {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: preferredStyle)
+    public func select(_ actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
 
-        let confirmAction = UIAlertAction(title: confirmLabel, style: cancelStyle) { _ in confirmAction() }
-        alert.addAction(confirmAction)
+        for action in actions {
+            alert.addAction(action)
+        }
+
+        let cancelAction = UIAlertAction(title: cancelLabel, style: cancelStyle) { _ in cancelAction() }
+        alert.addAction(cancelAction)
 
         return alert
     }
@@ -148,46 +170,21 @@ public struct AlertFactory {
 
         return alert
     }
-
-    /**
-     Shows an alert with multiple actions and a cancel action.
-
-     This is typically used with `preferredStyle = .actionSheet`
-
-     - Parameters:
-        - actions: the action buttons to select from
-        - cancelAction: optional callback for the cancel button action
-     */
-    public func select(_ actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-
-        for action in actions {
-            alert.addAction(action)
-        }
-
-        let cancelAction = UIAlertAction(title: cancelLabel, style: cancelStyle) { _ in cancelAction() }
-        alert.addAction(cancelAction)
-
-        return alert
-    }
 }
 
 extension UIViewController {
 
     /**
-     Construct and show a prompt using `AlertFactory`.
+     Construct and show an alert using `AlertFactory`.
 
      - Parameters:
-        - title: the prompt alert title
+        - title: the alert title
         - message: optional message
-        - placeholder: placeholder text for the text field
-        - defaultValue: optional default text
         - confirmAction: callback for the confirm button press
-        - cancelAction: optional callback for the cancel button press
      */
-    public func prompt(title: String?, message: String?, placeholder: String, defaultValue: String? = nil, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
-        let alertFactory = AlertFactory(title: title, message: message, placeholder: placeholder, defaultValue: defaultValue)
-        let alert = alertFactory.prompt(confirmAction: confirmAction, cancelAction: cancelAction)
+    public func alert(title: String?, message: String?, confirmAction: @escaping () -> Void = {}) {
+        let alertFactory = AlertFactory(title: title, message: message)
+        let alert = alertFactory.alert(confirmAction: confirmAction)
         present(alert, animated: true, completion: nil)
     }
 
@@ -207,20 +204,6 @@ extension UIViewController {
     }
 
     /**
-     Construct and show an alert using `AlertFactory`.
-
-     - Parameters:
-        - title: the alert title
-        - message: optional message
-        - confirmAction: callback for the confirm button press
-     */
-    public func alert(title: String?, message: String?, confirmAction: @escaping () -> Void = {}) {
-        let alertFactory = AlertFactory(title: title, message: message)
-        let alert = alertFactory.alert(confirmAction: confirmAction)
-        present(alert, animated: true, completion: nil)
-    }
-
-    /**
      Construct and show a select using `AlertFactory`.
 
      - Parameters:
@@ -232,6 +215,23 @@ extension UIViewController {
     public func select(title: String?, message: String?, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.select(actions, cancelAction: cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+    /**
+     Construct and show a prompt using `AlertFactory`.
+
+     - Parameters:
+        - title: the prompt alert title
+        - message: optional message
+        - placeholder: placeholder text for the text field
+        - defaultValue: optional default text
+        - confirmAction: callback for the confirm button press
+        - cancelAction: optional callback for the cancel button press
+     */
+    public func prompt(title: String?, message: String?, placeholder: String, defaultValue: String? = nil, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
+        let alertFactory = AlertFactory(title: title, message: message, placeholder: placeholder, defaultValue: defaultValue)
+        let alert = alertFactory.prompt(confirmAction: confirmAction, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
     }
 }
