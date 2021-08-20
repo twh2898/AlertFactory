@@ -113,4 +113,33 @@ class ViewController: UIViewController {
             present(alert, animated: true)
         }
     }
+
+    @IBAction func selectAction(_ sender: Any) {
+        let handler: (UIAlertAction) -> Void = { action in
+            print("Selected \(action.title!)")
+        }
+        let actions = [
+            UIAlertAction(title: "Apple", style: .default, handler: handler),
+            UIAlertAction(title: "Peach", style: .default, handler: handler),
+            UIAlertAction(title: "Pair", style: .default, handler: handler),
+            UIAlertAction(title: "Banana", style: .default, handler: handler),
+        ]
+
+        if useShorthand {
+            self.select(
+                title: "Select a Fruit", message: "What is your favorite fruit?",
+                actions: actions,
+                cancelAction: {
+                    print("Confirm was canceled")
+                })
+        } else {
+            let factory = AlertFactory(title: "Select a Fruit", message: "What is your favorite fruit?")
+            let alert = factory.select(
+                actions: actions,
+                cancelAction: {
+                    print("Confirm was canceled")
+                })
+            present(alert, animated: true)
+        }
+    }
 }
