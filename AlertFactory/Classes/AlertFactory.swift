@@ -125,7 +125,7 @@ public struct AlertFactory {
         - actions: the action buttons to select from
         - cancelAction: optional callback for the cancel button action
      */
-    public func select(_ actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) -> UIAlertController {
+    public func select(actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
 
         for action in actions {
@@ -214,7 +214,7 @@ extension UIViewController {
      */
     public func select(title: String?, message: String?, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
-        let alert = alertFactory.select(actions, cancelAction: cancelAction)
+        let alert = alertFactory.select(actions: actions, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
     }
 
