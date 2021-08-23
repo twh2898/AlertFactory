@@ -180,7 +180,7 @@ extension UIViewController {
         - message: optional message
         - confirmAction: callback for the confirm button press
      */
-    public func alert(title: String?, message: String?, confirmAction: @escaping () -> Void = {}) {
+    public func alert(title: String? = nil, message: String? = nil, confirmAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.alert(confirmAction: confirmAction)
         present(alert, animated: true, completion: nil)
@@ -195,7 +195,7 @@ extension UIViewController {
         - confirmAction: callback for the confirm button press
         - cancelAction: optional callback for the cancel button press
      */
-    public func confirm(title: String?, message: String?, confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void = {}) {
+    public func confirm(title: String? = nil, message: String? = nil, confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.confirm(confirmAction: confirmAction, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
@@ -211,7 +211,7 @@ extension UIViewController {
         - cancelAction: callback for the cancel button press
         - sender: optional UIBarButtonItem if the alert style should be an Action Sheet
      */
-    public func select(title: String?, message: String?, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}, sender: UIBarButtonItem? = nil) {
+    public func select(title: String? = nil, message: String? = nil, actions: [UIAlertAction], cancelAction: @escaping () -> Void = {}, sender: UIBarButtonItem? = nil) {
         let alertFactory = AlertFactory(title: title, message: message)
         let alert = alertFactory.select(actions: actions, cancelAction: cancelAction, sender: sender)
         present(alert, animated: true, completion: nil)
@@ -228,7 +228,7 @@ extension UIViewController {
         - confirmAction: callback for the confirm button press
         - cancelAction: optional callback for the cancel button press
      */
-    public func prompt(title: String?, message: String?, placeholder: String, defaultValue: String? = nil, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
+    public func prompt(title: String? = nil, message: String? = nil, placeholder: String, defaultValue: String? = nil, confirmAction: @escaping (String?) -> Void, cancelAction: @escaping () -> Void = {}) {
         let alertFactory = AlertFactory(title: title, message: message, placeholder: placeholder, defaultValue: defaultValue)
         let alert = alertFactory.prompt(confirmAction: confirmAction, cancelAction: cancelAction)
         present(alert, animated: true, completion: nil)
